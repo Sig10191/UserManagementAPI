@@ -1,0 +1,43 @@
+@UserManagementAPI_HostAddress = http://localhost:5174
+
+### Get all users
+GET {{UserManagementAPI_HostAddress}}/api/users
+Accept: application/json
+
+### Get a user by ID
+GET {{UserManagementAPI_HostAddress}}/api/users/1
+Accept: application/json
+
+### Get a missing user (expect 404)
+GET {{UserManagementAPI_HostAddress}}/api/users/9999
+Accept: application/json
+
+### Create a user (expect 201 Created)
+POST {{UserManagementAPI_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+	"name": "Jordan Lee",
+	"email": "jordan.lee@example.com"
+}
+
+### Create a user with invalid data (expect 400 Bad Request)
+POST {{UserManagementAPI_HostAddress}}/api/users
+Content-Type: application/json
+
+{
+	"name": "",
+	"email": "not-an-email"
+}
+
+### Replace a user (expect 200 OK)
+PUT {{UserManagementAPI_HostAddress}}/api/users/1
+Content-Type: application/json
+
+{
+	"name": "Jordan A. Lee",
+	"email": "jordan.lee@example.com"
+}
+
+### Delete a user (expect 204 No Content)
+DELETE {{UserManagementAPI_HostAddress}}/api/users/1
